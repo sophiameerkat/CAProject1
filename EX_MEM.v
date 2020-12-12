@@ -33,3 +33,4 @@ always @(posedge clk_i) begin
 	ALUResult_o = ALUResult_i;
 	MemData_o = rs2_data_i;
 end
+endmodule
