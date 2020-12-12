@@ -1,30 +1,79 @@
-module Control(Op_i, ALUOp_o, ALUSrc_o, RegWrite_o);
+module Control(Op_i, NoOp_i, RegWrite_o, MemReg_o, MemRead_o, MemWrite_o, ALUOp_o, ALUSrc_o, Branch_o);
 
 //Ports
 input [6:0] Op_i;
+input NoOp_i;
+output RegWrite_o, MemReg_o, MemRead_o, MemWrite_o, ALUSrc_o, Branch_o;
 output [1:0] ALUOp_o;
-output ALUSrc_o;
-output RegWrite_o;
 
 //Regsiters
 reg [1:0] ALUOp_o;
-reg ALUSrc_o;
-reg RegWrite_o;
+reg RegWrite_o, MemReg_o, MemRead_o, MemWrite_o, ALUSrc_o, Branch_o;
 
 always @(*) begin
-	case(Op_i)
-		7'b0110011: //R type
-			begin
-			ALUOp_o = 2'b10;
-			ALUSrc_o = 1'b0;
-			RegWrite_o = 1'b1;
-			end
-		7'b0010011: // I type
-			begin
-			ALUOp_o = 2'b00;
-			ALUSrc_o = 1'b1;
-			RegWrite_o = 1'b1;
-			end
-	endcase
+	if (NoOp_i == 0)
+		begin
+		RegWrite_o = 1'b1;
+		MemReg_o = 1'b0;
+		MemRead_o = 1'b0;
+		MemWrite = 1'b0;
+		ALUOp_o = 2'b10;
+		ALUSrc_o = 1'b0;
+		Branch_o = 1'b0;
+		end
+	else begin
+		case(Op_i)
+			7'b0110011: //R type
+				begin
+				RegWrite_o = 1'b1;
+				MemReg_o = 1'b0;
+				MemRead_o = 1'b0;
+				MemWrite = 1'b0;
+				ALUOp_o = 2'b10;
+				ALUSrc_o = 1'b0;
+				Branch_o = 1'b0;
+				end
+			7'b0010011: // I type
+				begin
+				MemReg_o = 1'b0;
+				MemRead_o = 1'b0;
+				MemWrite = 1'b0;
+				RegWrite_o = 1'b1;
+				ALUOp_o = 2'b00;
+				ALUSrc_o = 1'b1;
+				Branch_o = 1'b0;
+				end
+			7'b0000011: //load
+				begin
+				MemReg_o = 1'b1;
+				MemRead_o = 1'b1;
+				MemWrite = 1'b0;
+				RegWrite_o = 1'b1;
+				ALUOp_o = 2'b00;
+				ALUSrc_o = 1'b1;
+				Branch_o = 1'b0;
+				end
+			7'b0100011: //store
+				begin
+				MemReg_o = 1'b0;
+				MemRead_o = 1'b0;
+				MemWrite = 1'b1;
+				RegWrite_o = 1'b0;
+				ALUOp_o = 2'b00;
+				ALUSrc_o = 1'b1;
+				Branch_o = 1'b0;
+				end
+			7'b1100011: //beq
+				begin
+				MemReg_o = 1'b0;
+				MemRead_o = 1'b0;
+				MemWrite = 1'b0;
+				RegWrite_o = 1'b0;
+				ALUOp_o = 2'b01;
+				ALUSrc_o = 1'b0;
+				Branch_o = 1'b1;
+				end
+		endcase
+	end
 end
 endmodule
