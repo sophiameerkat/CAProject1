@@ -1,4 +1,4 @@
-module EX_MEM(clk_i, RegWrite_i, MemReg_i, MemRead_i, MemWrite_i, ALUResult_i, RegWrite_o, MemReg_o, MemRead_o, MemWrite_o, rs2_data_i, rd_addr_i, rd_addr_o, MemAddr_o, MemData_o);
+module EX_MEM(clk_i, RegWrite_i, MemReg_i, MemRead_i, MemWrite_i, ALUResult_i, RegWrite_o, MemReg_o, MemRead_o, MemWrite_o, rs2_data_i, rd_addr_i, rd_addr_o, ALUResult_o, MemData_o);
 
 //Ports
 input clk_i;
@@ -6,11 +6,11 @@ input RegWrite_i, MemReg_i, MemRead_i, MemWrite_i;
 input [31:0] ALUResult_i, rs2_data_i, rd_addr_i;
 
 output RegWrite_o, MemReg_o, MemRead_o, MemWrite_o;
-output [31:0] rd_addr_o, MemAddr_o, MemData_o;
+output [31:0] rd_addr_o, ALUResult_o, MemData_o;
 
 //Registers
 reg RegWrite_o, MemReg_o, MemRead_o, MemWrite_o;
-reg [31:0] rd_addr_o, MemAddr_o, MemData_o;
+reg [31:0] rd_addr_o, ALUResult_o, MemData_o;
 
 initial begin
 	RegWrite_o = 0;
@@ -28,6 +28,6 @@ always @(posedge clk_i) begin
 	MemRead_o = MemRead_i;
 	MemWrite_o = MemWrite_i;
 	rd_addr_o = rd_addr_i;
-	MemAddr_o = ALUResult_i;
+	ALUResult_o = ALUResult_i;
 	MemData_o = rs2_data_i;
 end
