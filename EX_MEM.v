@@ -6,11 +6,13 @@ input RegWrite_i, MemReg_i, MemRead_i, MemWrite_i;
 input [31:0] ALUResult_i, rs2_data_i, rd_addr_i;
 
 output RegWrite_o, MemReg_o, MemRead_o, MemWrite_o;
-output [31:0] rd_addr_o, ALUResult_o, MemData_o;
+output [31:0] ALUResult_o, MemData_o;
+output [5:0] rd_addr_o;
 
 //Registers
 reg RegWrite_o, MemReg_o, MemRead_o, MemWrite_o;
-reg [31:0] rd_addr_o, ALUResult_o, MemData_o;
+reg [31:0] ALUResult_o, MemData_o;
+reg [5:0] rd_addr_o;
 
 initial begin
 	RegWrite_o = 0;
