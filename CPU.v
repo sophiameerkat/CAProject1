@@ -14,7 +14,7 @@ input               start_i;
 wire [31:0] PCNext_pre, PCNext, PCCurrent, PCBranch;
 wire PCWrite;
 wire PC_signal;
-wire [31:0] Instruction;
+wire [31:0] Instruction_pre;
 
 PC_Adder PC_Adder(
     .data1_in   (PCCurrent),
@@ -44,7 +44,7 @@ Instruction_Memory Instruction_Memory(
 );
 
 //Wires for IF_ID Stage
-wire [31:0] IF_ID_PC_o, IF_ID_Instruction_o;
+wire [31:0] IF_ID_PC_o, Instruction;
 wire IFStall, IFFlush;
 
 IF_ID IF_ID(
@@ -53,8 +53,8 @@ IF_ID IF_ID(
     .PC_o   (IF_ID_PC_o),
     .IF_stall   (IFStall),
     .IF_flush   (IFFlush),
-    .instruction_i  (instruction),
-    .Instruction_o  (IF_ID_Instruction_o)
+    .instruction_i  (Instruction_pre),
+    .Instruction_o  (Instruction)
 )
 
 //Wires for ID Stage
