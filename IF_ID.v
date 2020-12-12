@@ -13,13 +13,18 @@ reg [31:0] PC_o;
 reg [31:0] instruction_o;
 
 always @(posedge clk) begin
-	if (IFStall == 0 && IFFlush == 0) begin
-		PC_o = PC_i;
-		instruction_o = instruction_i;
-	end
-	else begin
+	if(IF_flush) begin
 		PC_o = 32'b0;
 		instruction_o = 32'b0;
+	end
+
+	else if(IF_stall) begin
+		//do nothing
+	end
+
+	else begin
+		PC_o = PC_i;
+		instruction_o = instruction_i;
 	end
 end
 endmodule

@@ -8,6 +8,7 @@ module ID_EX
 	MemWrite_i,
 	ALUOp_i,
 	ALUSrc_i,
+	NoOp_i,
 	//register data
 	reg1Data_i,
 	reg2Data_i,
@@ -41,6 +42,7 @@ input MemRead_i;
 input MemWrite_i;
 input ALUOp_i;
 input ALUSrc_i;
+input NoOp_i;
 input [31:0] reg1Data_i;
 input [31:0] reg2Data_i;
 input [4:0] rs1_i;
@@ -78,7 +80,7 @@ reg [9:0] funct_o;
 reg [31:0] imm_o;
 
 always @(posedge clk) begin
-	if() begin//NoOp
+	if(NoOp_i == 1) begin
 		RegWrite_o <= 0;
 		MemtoReg_o <= 0;
 		MemRead_o <= 0;
