@@ -19,7 +19,7 @@ always @(posedge clk) begin
 	end
 	else begin
 		PC_o = 32'b0;
-		instruction_o = 32b'0;
+		instruction_o = 32'b0;
 	end
 end
 endmodule

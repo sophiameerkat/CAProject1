@@ -11,7 +11,7 @@ reg [1:0] ALUOp_o;
 reg RegWrite_o, MemReg_o, MemRead_o, MemWrite_o, ALUSrc_o, Branch_o;
 
 always @(*) begin
-	if (NoOp_i == 0)
+	if (NoOp_i == 1)
 		begin
 		RegWrite_o = 1'b1;
 		MemReg_o = 1'b0;
