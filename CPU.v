@@ -40,7 +40,7 @@ PC PC(
 
 Instruction_Memory Instruction_Memory(
     .addr_i     (PCCurrent), 
-    .instr_o    (Instruction)
+    .instr_o    (Instruction_pre)
 );
 
 //Wires for IF_ID Stage
@@ -58,13 +58,29 @@ IF_ID IF_ID(
 )
 
 //Wires for ID Stage
-wire [4:0] RegisterReadAddr1, RegisterReadAddr2, RegisterWriteAddr;
-wire RegWrite;
-wire [31:0] RegisterReadData1, RegisterReadData2, RegisterWriteData;
-wire [6:0] Opcode;
-wire [1:0] ALUOp;
-wire NoOp_signal, RegWrite, MemtoReg, MemRead, MemWrite, ALUSrc, Branch;
+wire [31:0] imm_to_Adder;
+wire MemRead_ID_EXtoEX_MEM;
+wire [4:0] RD_ID_EXtoEX_MEM;
+wire NoOpSignal; //to Control & ID/EX
+wire StallSignal;
 
+Adder Adder(
+    .addr_i     (IF_ID_PC_o),
+    .imm_i      (imm_to_Adder),
+    .addr_o     (PCBranch)
+);
+
+HazardDetectionUnit HazardDetectionUnit(
+    .MemReadSignal_i    (MemRead_ID_EXtoEX_MEM),
+    .RS1_i  (RegisterReadAddr1),
+    .RS2_i  (RegisterReadAddr2),
+    .RD_i   (RD_ID_EXtoEX_MEM),
+    .noOpSignal_o   (NoOpSignal),
+    .stallSignal_o  (StallSignal),　
+    .PCWriteSignal_o    (PCWrite)
+);
+
+/* Below haven't finish yet */
 
 Registers Registers(
     .clk_i      (clk_i),
@@ -90,7 +106,6 @@ Control Control(
 );
 
 
-/* Below haven't finish yet */
 
 // Wires
 wire [31:0] ReadData2;

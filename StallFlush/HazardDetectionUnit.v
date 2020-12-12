@@ -1,8 +1,7 @@
-//wrong branch prediction (stall) & load (stall)
+//load (stall)
 
 module HazardDetectionUnit
 (
-	branchTaken_i,
 	MemReadSignal_i,
 	RS1_i,
 	RS2_i,
@@ -12,7 +11,6 @@ module HazardDetectionUnit
 	PCWriteSignal_o
 );
 
-input branchTaken_i;
 input MemReadSignal_i;
 input [4:0] RS1_i;
 input [4:0] RS2_i;
@@ -33,10 +31,6 @@ always@* begin
 	stallSignal_oReg = 0;
 	PCWriteSignal_oReg = 1;
 	
-	if(branchTaken_i) begin //branch taken, stall
-		PCWriteSignal_oReg = 0;
-	end
-
 	if(MemReadSignal_i and (RD_i == RS1_i or RD_i == RS2_i)) begin //load, stall
 		noOpSignal_oReg = 1;
 		stallSignal_oReg = 1;
