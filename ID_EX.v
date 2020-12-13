@@ -50,7 +50,7 @@ input [4:0] rs2_i;
 input [4:0] rd_i;
 input [9:0] funct_i;
 input [31:0] imm_i;
-output RegWrite_o,
+output RegWrite_o;
 output MemtoReg_o;
 output MemRead_o;
 output MemWrite_o;
