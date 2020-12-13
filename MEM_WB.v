@@ -12,7 +12,7 @@ output [31:0] data1_o, data2_o;
 
 //Registers
 reg RegWrite_o, MemReg_o;
-reg [4:0] rd_addr_i;
+reg [4:0] rd_addr_o;
 reg [31:0] data1_o, data2_o;
 
 initial begin

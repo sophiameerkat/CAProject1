@@ -16,7 +16,7 @@ always @(*) begin
 			RegWrite_o = 1'b0;
 			MemReg_o = 1'b0;
 			MemRead_o = 1'b0;
-			MemWrite = 1'b0;
+			MemWrite_o = 1'b0;
 			ALUOp_o = 2'b10;
 			ALUSrc_o = 1'b0;
 			Branch_o = 1'b0;
@@ -26,7 +26,7 @@ always @(*) begin
 			RegWrite_o = 1'b1;
 			MemReg_o = 1'b0;
 			MemRead_o = 1'b0;
-			MemWrite = 1'b0;
+			MemWrite_o = 1'b0;
 			ALUOp_o = 2'b10;
 			ALUSrc_o = 1'b0;
 			Branch_o = 1'b0;
@@ -35,7 +35,7 @@ always @(*) begin
 			begin
 			MemReg_o = 1'b0;
 			MemRead_o = 1'b0;
-			MemWrite = 1'b0;
+			MemWrite_o = 1'b0;
 			RegWrite_o = 1'b1;
 			ALUOp_o = 2'b00;
 			ALUSrc_o = 1'b1;
@@ -45,7 +45,7 @@ always @(*) begin
 			begin
 			MemReg_o = 1'b1;
 			MemRead_o = 1'b1;
-			MemWrite = 1'b0;
+			MemWrite_o = 1'b0;
 			RegWrite_o = 1'b1;
 			ALUOp_o = 2'b00;
 			ALUSrc_o = 1'b1;
@@ -55,7 +55,7 @@ always @(*) begin
 			begin
 			MemReg_o = 1'b0;
 			MemRead_o = 1'b0;
-			MemWrite = 1'b1;
+			MemWrite_o = 1'b1;
 			RegWrite_o = 1'b0;
 			ALUOp_o = 2'b00;
 			ALUSrc_o = 1'b1;
@@ -65,7 +65,7 @@ always @(*) begin
 			begin
 			MemReg_o = 1'b0;
 			MemRead_o = 1'b0;
-			MemWrite = 1'b0;
+			MemWrite_o = 1'b0;
 			RegWrite_o = 1'b0;
 			ALUOp_o = 2'b01;
 			ALUSrc_o = 1'b0;

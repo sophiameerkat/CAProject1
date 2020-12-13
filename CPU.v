@@ -54,9 +54,11 @@ IF_ID IF_ID(
     .IF_stall   (IFStall),
     .IF_flush   (IFFlush),
     .instruction_i  (Instruction_pre),
-    .Instruction_o  (Instruction)
+    .instruction_o  (Instruction)
 );
 
+wire [4:0] RegisterReadAddr1, RegisterReadAddr2;
+wire [6:0] Opcode;
 //Wires for ID Stage
 //Adder
 wire [31:0] SignExtensionOut;
@@ -73,7 +75,7 @@ wire RegWrite_ControltoID_EX;
 wire MemtoReg_ControltoID_EX;
 wire MemRead_ControltoID_EX;
 wire MemWrite_ControltoID_EX;
-wire ALUOp;
+wire [1:0] ALUOp;
 wire ALUSrc;
 wire Branch;
 //Registers
@@ -97,11 +99,11 @@ Adder Adder(
 
 HazardDetectionUnit HazardDetectionUnit(
     .MemReadSignal_i    (MemRead_ID_EXtoEX_MEM),
-    .RS1_i  (RegisterReadAddr1),
-    .RS2_i  (RegisterReadAddr2),
-    .RD_i   (RD_ID_EXtoEX_MEM),
-    .noOpSignal_o   (NoOpSignal),
-    .stallSignal_o  (IFStall),
+    .RS1_i  		(RegisterReadAddr1),
+    .RS2_i  		(RegisterReadAddr2),
+    .RD_i   		(RD_ID_EXtoEX_MEM),
+    .noOpSignal_o   	(NoOpSignal),
+    .stallSignal_o  	(IFStall),
     .PCWriteSignal_o    (PCWrite)
 );
 
@@ -154,7 +156,7 @@ wire RegWrite_ID_EXtoEX_MEM;
 wire MemtoReg_ID_EXtoEX_MEM;
 //wire MemRead_ID_EXtoEX_MEM;
 wire MemWrite_ID_EXtoEX_MEM;
-wire ALUOp_ID_EXtoALUControl;
+wire [1:0] ALUOp_ID_EXtoALUControl;
 wire ALUSrc_ID_EXtoMUX;
 wire [31:0] RS1data_ID_EXtoMUX;
 wire [31:0] RS2data_ID_EXtoMUX;
@@ -166,10 +168,10 @@ wire [31:0] imm_ID_EXtoMUX;
 ID_EX ID_EX(
     .clk_i  (clk_i),
     //signals
-    .RegWrite_i  (RegWrite_ControltoID_EX),
+    .RegWrite_i      (RegWrite_ControltoID_EX),
     .MemtoReg_i  (MemtoReg_ControltoID_EX),
     .MemRead_i   (MemRead_ControltoID_EX),
-    .MemWrite_i  (MemWrite_ControltoID_EX),
+    .MemWrite_i     (MemWrite_ControltoID_EX),
     .ALUOp_i     (ALUOp),
     .ALUSrc_i    (ALUSrc),
     .NoOp_i      (NoOpSignal),
@@ -287,7 +289,7 @@ wire [31:0] ReadData_DMtoMEM_WB;
 
 Data_Memory Data_Memory (
     .clk_i  (clk_i), 
-    .addr_i     (ALUResult_EXMEMtoDM), 
+    .addr_i     (ALUResult_EX_MEMtoDM), 
     .MemRead_i  (MemRead_EX_MEMtoDM),
     .MemWrite_i     (MemWrite_EX_MEMtoDM),
     .data_i     (RS2data_EXMEMtoDM),
@@ -295,7 +297,7 @@ Data_Memory Data_Memory (
 );
 
 //Wires for MEM_WB Stage
-wire [31:0] MemtoReg_MEM_WBtoWBMUX;
+wire	    MemtoReg_MEM_WBtoWBMUX;
 wire [31:0] ALUResult_MEM_WBtoWBMux;
 wire [31:0] ReadData_MEM_WBtoWBMux;
 
@@ -307,7 +309,7 @@ MEM_WB MEM_WB(
     .RegWrite_o     (RegWrite_MEM_WBtoRegs), 
     .MemReg_o   (MemtoReg_MEM_WBtoWBMUX), 
     .data1_i    (ALUResult_EX_MEMtoDM), 
-    .data2_i    (ReadData_DMtoMEMWB), 
+    .data2_i    (ReadData_DMtoMEM_WB), 
     .data1_o    (ALUResult_MEM_WBtoWBMux), 
     .data2_o    (ReadData_MEM_WBtoWBMux), 
     .rd_addr_o  (RDaddr_MEM_WBtoRegs)

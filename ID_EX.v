@@ -40,7 +40,7 @@ input RegWrite_i;
 input MemtoReg_i;
 input MemRead_i;
 input MemWrite_i;
-input ALUOp_i;
+input [1:0] ALUOp_i;
 input ALUSrc_i;
 input NoOp_i;
 input [31:0] reg1Data_i;
@@ -54,7 +54,7 @@ output RegWrite_o;
 output MemtoReg_o;
 output MemRead_o;
 output MemWrite_o;
-output ALUOp_o;
+output [1:0] ALUOp_o;
 output ALUSrc_o;
 output [31:0] reg1Data_o;
 output [31:0] reg2Data_o;
@@ -79,7 +79,7 @@ reg [4:0] rd_o;
 reg [9:0] funct_o;
 reg [31:0] imm_o;
 
-always @(posedge clk) begin
+always @(posedge clk_i) begin
 	if(NoOp_i == 1) begin
 		RegWrite_o <= 0;
 		MemtoReg_o <= 0;

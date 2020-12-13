@@ -3,7 +3,8 @@ module EX_MEM(clk_i, RegWrite_i, MemReg_i, MemRead_i, MemWrite_i, ALUResult_i, R
 //Ports
 input clk_i;
 input RegWrite_i, MemReg_i, MemRead_i, MemWrite_i;
-input [31:0] ALUResult_i, rs2_data_i, rd_addr_i;
+input [31:0] ALUResult_i, rs2_data_i;
+input [4:0] rd_addr_i;
 
 output RegWrite_o, MemReg_o, MemRead_o, MemWrite_o;
 output [31:0] ALUResult_o, MemData_o;
@@ -20,7 +21,7 @@ initial begin
 	MemRead_o = 0;
 	MemWrite_o = 0;
 	rd_addr_o = 0;
-	MemAddr_o = 0;
+	ALUResult_o = 0;
 	MemData_o = 0;
 end
 
