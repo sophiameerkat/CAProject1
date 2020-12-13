@@ -101,7 +101,7 @@ HazardDetectionUnit HazardDetectionUnit(
     .RS2_i  (RegisterReadAddr2),
     .RD_i   (RD_ID_EXtoEX_MEM),
     .noOpSignal_o   (NoOpSignal),
-    .stallSignal_o  (StallSignal),　
+    .stallSignal_o  (IFStall),　
     .PCWriteSignal_o    (PCWrite)
 );
 
