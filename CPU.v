@@ -101,7 +101,7 @@ HazardDetectionUnit HazardDetectionUnit(
     .RS2_i  (RegisterReadAddr2),
     .RD_i   (RD_ID_EXtoEX_MEM),
     .noOpSignal_o   (NoOpSignal),
-    .stallSignal_o  (IFStall),　
+    .stallSignal_o  (IFStall),
     .PCWriteSignal_o    (PCWrite)
 );
 
@@ -149,10 +149,10 @@ wire [4:0] RS1_IF_IDtoID_EX;
 wire [4:0] RS2_IF_IDtoID_EX;
 wire [4:0] RD_IF_IDtoID_EX;
 wire [9:0] Funct_IF_IDtoID_EX;
-assign Funct_IF_IDtoID_EX = {Instruction[31;25], Instruction[14:12]};
+assign Funct_IF_IDtoID_EX = {Instruction[31:25], Instruction[14:12]};
 wire RegWrite_ID_EXtoEX_MEM;
 wire MemtoReg_ID_EXtoEX_MEM;
-wire MemRead_ID_EXtoEX_MEM;
+//wire MemRead_ID_EXtoEX_MEM;
 wire MemWrite_ID_EXtoEX_MEM;
 wire ALUOp_ID_EXtoALUControl;
 wire ALUSrc_ID_EXtoMUX;
@@ -166,37 +166,37 @@ wire [31:0] imm_ID_EXtoMUX;
 ID_EX ID_EX(
     .clk_i  (clk_i),
     //signals
-    RegWrite_i      (RegWrite_ControltoID_EX),
-    MemtoReg_i  (MemtoReg_ControltoID_EX),
-    MemRead_i   (MemRead_ControltoID_EX),
-    MemWrite_i     (MemWrite_ControltoID_EX),
-    ALUOp_i     (ALUOp),
-    ALUSrc_i    (ALUSrc),
-    NoOp_i      (NoOpSignal),
+    .RegWrite_i  (RegWrite_ControltoID_EX),
+    .MemtoReg_i  (MemtoReg_ControltoID_EX),
+    .MemRead_i   (MemRead_ControltoID_EX),
+    .MemWrite_i  (MemWrite_ControltoID_EX),
+    .ALUOp_i     (ALUOp),
+    .ALUSrc_i    (ALUSrc),
+    .NoOp_i      (NoOpSignal),
     //register data
-    reg1Data_i  (RS1data_RegstoID_EX),
-    reg2Data_i  (RS2data_RegstoID_EX),
+    .reg1Data_i  (RS1data_RegstoID_EX),
+    .reg2Data_i  (RS2data_RegstoID_EX),
     //regID
-    rs1_i   (RS1_IF_IDtoID_EX),
-    rs2_i   (RS2_IF_IDtoID_EX),
-    rd_i    (RD_IF_IDtoID_EX),
+    .rs1_i   (RS1_IF_IDtoID_EX),
+    .rs2_i   (RS2_IF_IDtoID_EX),
+    .rd_i    (RD_IF_IDtoID_EX),
     //others
-    funct_i     (Funct_IF_IDtoID_EX),
-    imm_i   (SignExtensionOut),
+    .funct_i     (Funct_IF_IDtoID_EX),
+    .imm_i   (SignExtensionOut),
 
-    RegWrite_o  (RegWrite_ID_EXtoEX_MEM),
-    MemtoReg_o  (MemtoReg_ID_EXtoEX_MEM),
-    MemRead_o   (MemRead_ID_EXtoEX_MEM),
-    MemWrite_o  (MemWrite_ID_EXtoEX_MEM),
-    ALUOp_o     (ALUOp_ID_EXtoALUControl),
-    ALUSrc_o    (ALUSrc_ID_EXtoMUX),
-    reg1Data_o  (RS1data_ID_EXtoMUX),
-    reg2Data_o  (RS2data_ID_EXtoMUX),
-    rs1_o   (RS1_ID_EXtoFU),
-    rs2_o   (RS2_ID_EXtoFU),
-    rd_o    (RD_ID_EXtoEX_MEM),
-    funct_o  (Funct_ID_EXtoALUControl),
-    imm_o   (imm_ID_EXtoMUX)
+    .RegWrite_o  (RegWrite_ID_EXtoEX_MEM),
+    .MemtoReg_o  (MemtoReg_ID_EXtoEX_MEM),
+    .MemRead_o   (MemRead_ID_EXtoEX_MEM),
+    .MemWrite_o  (MemWrite_ID_EXtoEX_MEM),
+    .ALUOp_o     (ALUOp_ID_EXtoALUControl),
+    .ALUSrc_o    (ALUSrc_ID_EXtoMUX),
+    .reg1Data_o  (RS1data_ID_EXtoMUX),
+    .reg2Data_o  (RS2data_ID_EXtoMUX),
+    .rs1_o   (RS1_ID_EXtoFU),
+    .rs2_o   (RS2_ID_EXtoFU),
+    .rd_o    (RD_ID_EXtoEX_MEM),
+    .funct_o  (Funct_ID_EXtoALUControl),
+    .imm_o   (imm_ID_EXtoMUX)
 );
 
 // Wires for EX Stage
