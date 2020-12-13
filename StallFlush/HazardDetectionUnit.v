@@ -36,7 +36,9 @@ always@* begin
 		stallSignal_oReg = 1;
 		PCWriteSignal_oReg = 0;
 	end
+	else begin
+		//do nothing
+	end
 end
-
 
 endmodule

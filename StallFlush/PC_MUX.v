@@ -14,7 +14,9 @@ output [31:0] addr_o;
 reg [31:0] addr_oReg;
 assign addr_o = addr_oReg;
 
-always@(addrTaken_i and addrNotTaken_i) begin
+//always @(addrTaken_i and addrNotTaken_i) begin
+always @* begin
+
 	if(branchTaken_i) begin
 		addr_oReg = addrTaken_i;
 	end
