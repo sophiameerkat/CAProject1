@@ -7,7 +7,7 @@ input [5:0] rd_addr_i;
 input [31:0] data1_i, data2_i;
 
 output RegWrite_o, MemReg_o;
-output [5:0] rd_addr_i;
+output [5:0] rd_addr_o;
 output [31:0] data1_o, data2_o;
 
 //Registers
