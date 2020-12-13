@@ -27,7 +27,7 @@ PC_MUX PC_MUX(
     .addrNotTaken_i (PCNext),
     .addrTaken_i (PCBranch),
     .addr_o (PCNext_pre)
-)
+);
 
 PC PC(
     .clk_i      (clk_i),
@@ -55,7 +55,7 @@ IF_ID IF_ID(
     .IF_flush   (IFFlush),
     .instruction_i  (Instruction_pre),
     .Instruction_o  (Instruction)
-)
+);
 
 //Wires for ID Stage
 //Adder
