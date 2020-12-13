@@ -7,7 +7,7 @@ module HazardDetectionUnit
 	RS2_i,
 	RD_i,
 	noOpSignal_o,
-	stallSignal_o,　//to IF/ID latch
+	stallSignal_o, //to IF/ID latch
 	PCWriteSignal_o
 );
 
