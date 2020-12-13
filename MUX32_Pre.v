@@ -1,4 +1,4 @@
-module MUX32_New(data1_i, data2_i, data3_i, forward_select_i, data_o);
+module MUX32_Pre(data1_i, data2_i, data3_i, forward_select_i, data_o);
 
 //Ports
 input [31:0] data1_i;
