@@ -1,4 +1,4 @@
-module Fowarding_Unit(ID_EX_RS1, ID_EX_RS2, EX_MEM_RegWrite, EX_MEM_Rd, MEM_WB_RegWrite, MEM_WB_Rd, ForwardA, ForwardB);
+module Forwarding_Unit(ID_EX_RS1, ID_EX_RS2, EX_MEM_RegWrite, EX_MEM_Rd, MEM_WB_RegWrite, MEM_WB_Rd, ForwardA, ForwardB);
 
 //Ports
 input [4:0] ID_EX_RS1;
