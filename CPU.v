@@ -216,7 +216,7 @@ MUX32_Pre MUX_data1(
     .data3_i    (ALUResult_EX_MEMtoDM),
     .forward_select_i   (Forward_signal_A), 
     .data_o     (RS1data_MUXtoALU)
-)
+);
 
 MUX32_Pre MUX_data2(
     .data1_i    (RS2data_ID_EXtoMUX), 
@@ -224,7 +224,7 @@ MUX32_Pre MUX_data2(
     .data3_i    (ALUResult_EX_MEMtoDM),
     .forward_select_i   (Forward_signal_B), 
     .data_o     (RS2data_MUXtoALUMUX)
-)
+);
 
 Forwarding_Unit Forwarding_Unit(
     .ID_EX_RS1  (RS1_ID_EXtoFU), 
@@ -235,7 +235,7 @@ Forwarding_Unit Forwarding_Unit(
     .MEM_WB_Rd  (RDaddr_MEM_WBtoRegs), 
     .ForwardA   (Forward_signal_A), 
     .ForwardB   (Forward_signal_B)
-)
+);
 
 MUX32 MUX_ALUSrc(
     .data1_i    (RS2data_ID_EXtoMUX),
