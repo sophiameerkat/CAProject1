@@ -14,7 +14,7 @@ reg [31:0] addr_oReg;
 assign addr_o = addr_oReg;
 
 always@* begin
-	imm = imm << 1;
+	imm = imm_i << 1;
 	addr_oReg = addr_i + imm;
 end
 
