@@ -31,7 +31,7 @@ always@* begin
 	stallSignal_oReg = 0;
 	PCWriteSignal_oReg = 1;
 	
-	if(MemReadSignal_i and (RD_i == RS1_i or RD_i == RS2_i)) begin //load, stall
+	if(MemReadSignal_i && (RD_i == RS1_i || RD_i == RS2_i)) begin //load, stall
 		noOpSignal_oReg = 1;
 		stallSignal_oReg = 1;
 		PCWriteSignal_oReg = 0;
