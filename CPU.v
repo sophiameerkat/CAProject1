@@ -240,7 +240,7 @@ Forwarding_Unit Forwarding_Unit(
 );
 
 MUX32 MUX_ALUSrc(
-    .data1_i    (RS2data_ID_EXtoMUX),
+    .data1_i    (RS2data_MUXtoALUMUX),
     .data2_i    (SignExtensionOut),
     .select_i   (ALUSrc_ID_EXtoMUX),
     .data_o     (RS2data_ALUMUXtoALU)
@@ -304,7 +304,7 @@ wire [31:0] ReadData_MEM_WBtoWBMux;
 MEM_WB MEM_WB(
     .clk_i  (clk_i), 
     .RegWrite_i     (RegWrite_EX_MEMtoMEM_WB), 
-    .MemReg_i   (MemtoReg_ID_EXtoEX_MEM), 
+    .MemReg_i   (MemtoReg_EX_MEMtoMEM_WB), 
     .rd_addr_i  (RD_EX_MEMtoMEM_WB), 
     .RegWrite_o     (RegWrite_MEM_WBtoRegs), 
     .MemReg_o   (MemtoReg_MEM_WBtoWBMUX), 
