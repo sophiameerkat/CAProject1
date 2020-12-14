@@ -241,7 +241,7 @@ Forwarding_Unit Forwarding_Unit(
 
 MUX32 MUX_ALUSrc(
     .data1_i    (RS2data_MUXtoALUMUX),
-    .data2_i    (SignExtensionOut),
+    .data2_i    (imm_ID_EXtoMUX),
     .select_i   (ALUSrc_ID_EXtoMUX),
     .data_o     (RS2data_ALUMUXtoALU)
 );
