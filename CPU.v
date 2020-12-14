@@ -148,8 +148,11 @@ ID_zero ID_zero(
 
 //Wires for ID/EX Stage
 wire [4:0] RS1_IF_IDtoID_EX;
+assign RS1_IF_IDtoID_EX = Instruction [19:15];
 wire [4:0] RS2_IF_IDtoID_EX;
+assign RS2_IF_IDtoID_EX = Instruction [24:20];
 wire [4:0] RD_IF_IDtoID_EX;
+assign RD_IF_IDtoID_EX = Instruction [11:7];
 wire [9:0] Funct_IF_IDtoID_EX;
 assign Funct_IF_IDtoID_EX = {Instruction[31:25], Instruction[14:12]};
 wire RegWrite_ID_EXtoEX_MEM;

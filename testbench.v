@@ -43,11 +43,26 @@ initial begin
     // [RegisterInitialization] DO NOT REMOVE THIS FLAG !!!
 
     // TODO: initialize your pipeline registers
+    CPU.IF_ID.PC_o = 32'b0;
+    CPU.IF_ID.instruction_o = 32'b0;
+    CPU.ID_EX.RegWrite_o = 0;
+    CPU.ID_EX.MemtoReg_o = 0;
+    CPU.ID_EX.MemRead_o = 0;
+    CPU.ID_EX.MemWrite_o = 0;
+    CPU.ID_EX.ALUOp_o = 2'b0;
+    CPU.ID_EX.ALUSrc_o = 0;
+    CPU.ID_EX.reg1Data_o = 32'b0;
+    CPU.ID_EX.reg2Data_o = 32'b0;
+    CPU.ID_EX.rs1_o = 5'b0;
+    CPU.ID_EX.rs2_o = 5'b0;
+    CPU.ID_EX.rd_o = 5'b0;
+    CPU.ID_EX.funct_o = 10'b0;
+    CPU.ID_EX.imm_o = 32'b0;
 
     
     // Load instructions into instruction memory
     // Make sure you change back to "instruction.txt" before submission
-    $readmemb("instruction.txt", CPU.Instruction_Memory.memory);
+    $readmemb("instruction_1.txt", CPU.Instruction_Memory.memory);
     
     // Open output file
     // Make sure you change back to "output.txt" before submission
