@@ -9,7 +9,7 @@ output [31:0] data_o;
 //Registers 
 reg [31:0] data_o;
 
-always@(data1_i or data2_i or select_i) begin
+always@(*) begin
 	if (select_i == 0)
 		begin
 		data_o = data1_i;

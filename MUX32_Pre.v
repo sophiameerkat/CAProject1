@@ -10,7 +10,7 @@ output [31:0] data_o;
 //Registers 
 reg [31:0] data_o;
 
-always@(data1_i or data2_i or data3_i or forward_select_i) begin
+always@(*) begin
 	case(forward_select_i)
 		2'b00: data_o = data1_i;
 		2'b01: data_o = data2_i;
