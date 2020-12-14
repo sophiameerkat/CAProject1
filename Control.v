@@ -17,7 +17,7 @@ always @(*) begin
 			MemReg_o = 1'b0;
 			MemRead_o = 1'b0;
 			MemWrite_o = 1'b0;
-			ALUOp_o = 2'b10;
+			ALUOp_o = 2'b00;
 			ALUSrc_o = 1'b0;
 			Branch_o = 1'b0;
 			end
