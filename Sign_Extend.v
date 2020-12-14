@@ -11,23 +11,23 @@ always@(*) begin
 	case(op_i)
 		10'b0000010011 : //addi 
 		begin
-			data_o = { 20{data_i[31]}, data_i[31:20] };
+			data_o = { {20{data_i[31]}}, data_i[31:20] };
 		end
 		10'b1010010011 : //srai
 		begin
-			data_o = { 27{data_i[24]}, data_i[24:20] };
+			data_o = { {27{data_i[24]}}, data_i[24:20] };
 		end
 		10'b0100000011 : //lw
 		begin
-			data_o = { 20{data_i[31]}, data_i[31:20] };
+			data_o = { {20{data_i[31]}}, data_i[31:20] };
 		end
 		10'b0100100011 : //sw
 		begin
-			data_o = { 20{data_i[31]}, data_i[31:25], data_i[11:7] };
+			data_o = { {20{data_i[31]}}, data_i[31:25], data_i[11:7] };
 		end
 		10'b0001100011 : //beq
 		begin
-			data_o = { 20{data_i[31]}, data_i[31], data_i[7], data_i[30:25], data_i[11:8] };
+			data_o = { {20{data_i[31]}}, data_i[31], data_i[7], data_i[30:25], data_i[11:8] };
 		end
 	endcase
 end
