@@ -59,6 +59,12 @@ initial begin
     CPU.ID_EX.funct_o = 10'b0;
     CPU.ID_EX.imm_o = 32'b0;
 
+    CPU.MEM_WB.RegWrite_o = 0;
+    CPU.MEM_WB.MemReg_o = 0;
+    CPU.MEM_WB.rd_addr_o = 4'b0;
+    CPU.MEM_WB.data1_o = 32'b0;
+    CPU.MEM_WB.data2_o = 32'b0;
+
     
     // Load instructions into instruction memory
     // Make sure you change back to "instruction.txt" before submission

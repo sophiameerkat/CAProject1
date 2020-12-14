@@ -46,9 +46,12 @@ Instruction_Memory Instruction_Memory(
 //Wires for IF_ID Stage
 wire [31:0] IF_ID_PC_o, Instruction;
 wire IFStall, IFFlush;
+wire start_IF_IDtoID_EX;
 
 IF_ID IF_ID(
     .clk    (clk_i),
+    .start_i(start_i),
+    .start_o(start_IF_IDtoID_EX),
     .PC_i   (PCCurrent),
     .PC_o   (IF_ID_PC_o),
     .IF_stall   (IFStall),
@@ -147,6 +150,7 @@ ID_zero ID_zero(
 );
 
 //Wires for ID/EX Stage
+wire start_ID_EXtoEX_MEM;
 wire [4:0] RS1_IF_IDtoID_EX;
 assign RS1_IF_IDtoID_EX = Instruction [19:15];
 wire [4:0] RS2_IF_IDtoID_EX;
@@ -170,6 +174,7 @@ wire [31:0] imm_ID_EXtoMUX;
 
 ID_EX ID_EX(
     .clk_i  (clk_i),
+    .start_i(start_IF_IDtoID_EX),
     //signals
     .RegWrite_i      (RegWrite_ControltoID_EX),
     .MemtoReg_i  (MemtoReg_ControltoID_EX),
@@ -189,6 +194,7 @@ ID_EX ID_EX(
     .funct_i     (Funct_IF_IDtoID_EX),
     .imm_i   (SignExtensionOut),
 
+    .start_o    (start_ID_EXtoEX_MEM),
     .RegWrite_o  (RegWrite_ID_EXtoEX_MEM),
     .MemtoReg_o  (MemtoReg_ID_EXtoEX_MEM),
     .MemRead_o   (MemRead_ID_EXtoEX_MEM),
@@ -264,6 +270,7 @@ ALU ALU(
 );
 
 // Wires for EX/MEM Stage
+wire start_EX_MEMtoMEM_WB;
 wire MemtoReg_EX_MEMtoMEM_WB;
 wire MemRead_EX_MEMtoDM;
 wire MemWrite_EX_MEMtoDM;
@@ -271,11 +278,13 @@ wire [31:0] RS2data_EXMEMtoDM;
 
 EX_MEM EX_MEM (
     .clk_i  (clk_i), 
+    .start_i(start_ID_EXtoEX_MEM),
     .RegWrite_i     (RegWrite_ID_EXtoEX_MEM), 
     .MemReg_i   (MemtoReg_ID_EXtoEX_MEM), 
     .MemRead_i  (MemRead_ID_EXtoEX_MEM), 
     .MemWrite_i     (MemWrite_ID_EXtoEX_MEM), 
     .ALUResult_i    (ALUResult_ALUtoEX_MEM), 
+    .start_o    (start_EX_MEMtoMEM_WB),
     .RegWrite_o     (RegWrite_EX_MEMtoMEM_WB), 
     .MemReg_o   (MemtoReg_EX_MEMtoMEM_WB), 
     .MemRead_o  (MemRead_EX_MEMtoDM), 
@@ -306,6 +315,7 @@ wire [31:0] ReadData_MEM_WBtoWBMux;
 
 MEM_WB MEM_WB(
     .clk_i  (clk_i), 
+    .start_i (start_EX_MEMtoMEM_WB),
     .RegWrite_i     (RegWrite_EX_MEMtoMEM_WB), 
     .MemReg_i   (MemtoReg_EX_MEMtoMEM_WB), 
     .rd_addr_i  (RD_EX_MEMtoMEM_WB), 
