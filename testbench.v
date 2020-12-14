@@ -61,7 +61,7 @@ initial begin
 
     CPU.MEM_WB.RegWrite_o = 0;
     CPU.MEM_WB.MemReg_o = 0;
-    CPU.MEM_WB.rd_addr_o = 4'b0;
+    CPU.MEM_WB.rd_addr_o = 5'b0;
     CPU.MEM_WB.data1_o = 32'b0;
     CPU.MEM_WB.data2_o = 32'b0;
 
