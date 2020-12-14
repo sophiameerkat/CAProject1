@@ -50,6 +50,7 @@ wire start_IF_IDtoID_EX;
 
 IF_ID IF_ID(
     .clk    (clk_i),
+    .rst_i  (rst_i),
     .start_i(start_i),
     .start_o(start_IF_IDtoID_EX),
     .PC_i   (PCCurrent),
@@ -174,6 +175,7 @@ wire [31:0] imm_ID_EXtoMUX;
 
 ID_EX ID_EX(
     .clk_i  (clk_i),
+    .rst_i  (rst_i),
     .start_i(start_IF_IDtoID_EX),
     //signals
     .RegWrite_i      (RegWrite_ControltoID_EX),
@@ -278,6 +280,7 @@ wire [31:0] RS2data_EXMEMtoDM;
 
 EX_MEM EX_MEM (
     .clk_i  (clk_i), 
+    .rst_i  (rst_i),
     .start_i(start_ID_EXtoEX_MEM),
     .RegWrite_i     (RegWrite_ID_EXtoEX_MEM), 
     .MemReg_i   (MemtoReg_ID_EXtoEX_MEM), 
@@ -315,6 +318,7 @@ wire [31:0] ReadData_MEM_WBtoWBMux;
 
 MEM_WB MEM_WB(
     .clk_i  (clk_i), 
+    .rst_i  (rst_i),
     .start_i (start_EX_MEMtoMEM_WB),
     .RegWrite_i     (RegWrite_EX_MEMtoMEM_WB), 
     .MemReg_i   (MemtoReg_EX_MEMtoMEM_WB), 

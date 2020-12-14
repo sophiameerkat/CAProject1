@@ -1,7 +1,8 @@
-module MEM_WB(clk_i, start_i, RegWrite_i, MemReg_i, rd_addr_i, RegWrite_o, MemReg_o, data1_i, data2_i, data1_o, data2_o, rd_addr_o);
+module MEM_WB(clk_i, rst_i, start_i, RegWrite_i, MemReg_i, rd_addr_i, RegWrite_o, MemReg_o, data1_i, data2_i, data1_o, data2_o, rd_addr_o);
 
 //Ports
 input clk_i;
+input rst_i;
 input start_i;
 input RegWrite_i, MemReg_i;
 input [4:0] rd_addr_i;
@@ -30,13 +31,18 @@ always@(*) begin
 	rda = rd_addr_i;
 end
 
-always @(posedge clk_i) begin
-	if(start_i == 1) begin
-		RegWrite_o <= regw;
-		MemReg_o <= memr;
-		rd_addr_o <= rda;
-		data1_o <= qq;
-		data2_o <= data2_i;
+always @(posedge clk_i or posedge rst_i) begin
+	if(rst_i) begin
+		{ RegWrite_o, MemReg_o, rd_addr_o, data1_o, data2_o } = 0;
+	end
+	else begin
+		if(start_i == 1) begin
+			RegWrite_o <= regw;
+			MemReg_o <= memr;
+			rd_addr_o <= rda;
+			data1_o <= qq;
+			data2_o <= data2_i;
+		end
 	end
 end
 endmodule
