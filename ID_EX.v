@@ -69,7 +69,7 @@ reg RegWrite_o;
 reg MemtoReg_o;
 reg MemRead_o;
 reg MemWrite_o;
-reg ALUOp_o;
+reg [1:0] ALUOp_o;
 reg ALUSrc_o;
 reg [31:0] reg1Data_o;
 reg [31:0] reg2Data_o;
