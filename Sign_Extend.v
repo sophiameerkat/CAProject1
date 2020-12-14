@@ -1,10 +1,10 @@
-module Sign_Extend(data_i, op_i, data_o);
+module Sign_Extend(data_i, data_o);
 
 //Ports
 input [31:0] data_i; //it is now the whole instruction
-input [9:0] op_i; //funct3 + opcode
+//input [9:0] op_i; //funct3 + opcode
 output [31:0] data_o;
-
+wire [9:0] op_i = {data_i[14:12], data_i[6:0]};
 reg [31:0] data_o;
 //addi [31:20], srai [24:20], lw [31:20], sw [31:25] [11:7], beq [31] [7] [30:25] [11:8]
 always@(*) begin
