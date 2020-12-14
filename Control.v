@@ -33,40 +33,40 @@ always @(*) begin
 			end
 		7'b0010011: // I type
 			begin
+			RegWrite_o = 1'b1;
 			MemReg_o = 1'b0;
 			MemRead_o = 1'b0;
 			MemWrite_o = 1'b0;
-			RegWrite_o = 1'b1;
 			ALUOp_o = 2'b00;
 			ALUSrc_o = 1'b1;
 			Branch_o = 1'b0;
 			end
 		7'b0000011: //load
 			begin
+			RegWrite_o = 1'b1;
 			MemReg_o = 1'b1;
 			MemRead_o = 1'b1;
 			MemWrite_o = 1'b0;
-			RegWrite_o = 1'b1;
 			ALUOp_o = 2'b00;
 			ALUSrc_o = 1'b1;
 			Branch_o = 1'b0;
 			end
 		7'b0100011: //store
 			begin
+			RegWrite_o = 1'b0;
 			MemReg_o = 1'b0;
 			MemRead_o = 1'b0;
 			MemWrite_o = 1'b1;
-			RegWrite_o = 1'b0;
 			ALUOp_o = 2'b00;
 			ALUSrc_o = 1'b1;
 			Branch_o = 1'b0;
 			end
 		7'b1100011: //beq
 			begin
+			RegWrite_o = 1'b0;
 			MemReg_o = 1'b0;
 			MemRead_o = 1'b0;
 			MemWrite_o = 1'b0;
-			RegWrite_o = 1'b0;
 			ALUOp_o = 2'b01;
 			ALUSrc_o = 1'b0;
 			Branch_o = 1'b1;
