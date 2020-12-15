@@ -12,7 +12,7 @@ output [31:0] addr_o;
 reg [31:0] addr_o;
 
 always@* begin
-	addr_o = addr_i + imm_i << 1;
+	addr_o = addr_i + (imm_i << 1);
 end
 
 endmodule
