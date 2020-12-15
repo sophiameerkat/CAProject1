@@ -13,7 +13,7 @@ input               start_i;
 //Wires for IF Stage
 wire [31:0] PCNext_pre, PCNext, PCCurrent, PCBranch;
 wire PCWrite;
-wire PC_signal;
+wire BranchTaken;
 wire [31:0] Instruction_pre;
 
 PC_Adder PC_Adder(
@@ -23,7 +23,7 @@ PC_Adder PC_Adder(
 );
 
 PC_MUX PC_MUX(
-    .branchTaken_i (PC_signal),
+    .branchTaken_i (BranchTaken),
     .addrNotTaken_i (PCNext),
     .addrTaken_i (PCBranch),
     .addr_o (PCNext_pre)
@@ -45,7 +45,7 @@ Instruction_Memory Instruction_Memory(
 
 //Wires for IF_ID Stage
 wire [31:0] IF_ID_PC_o, Instruction;
-wire IFStall, IFFlush;
+wire IFStall;
 wire start_IF_IDtoID_EX;
 
 IF_ID IF_ID(
@@ -56,7 +56,7 @@ IF_ID IF_ID(
     .PC_i   (PCCurrent),
     .PC_o   (IF_ID_PC_o),
     .IF_stall   (IFStall),
-    .IF_flush   (IFFlush),
+    .IF_flush   (BranchTaken),
     .instruction_i  (Instruction_pre),
     .instruction_o  (Instruction)
 );
@@ -93,7 +93,6 @@ wire [31:0] SignExtensionIn;
 assign SignExtensionIn = Instruction;
 //ID_branch
 wire Zero_ID_zerotoID_branch;
-wire BranchTaken;
 
 Adder Adder(
     .addr_i     (IF_ID_PC_o),

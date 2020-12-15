@@ -9,13 +9,10 @@ input [31:0] addr_i;
 input [31:0] imm_i;
 output [31:0] addr_o;
 
-reg [11:0] imm;
-reg [31:0] addr_oReg;
-assign addr_o = addr_oReg;
+reg [31:0] addr_o;
 
 always@* begin
-	imm = imm_i << 1;
-	addr_oReg = addr_i + imm;
+	addr_o = addr_i + imm_i << 1;
 end
 
 endmodule
