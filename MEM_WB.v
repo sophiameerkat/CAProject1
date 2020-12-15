@@ -16,9 +16,6 @@ output [31:0] data1_o, data2_o;
 reg RegWrite_o, MemReg_o;
 reg [4:0] rd_addr_o;
 reg [31:0] data1_o, data2_o;
-reg [31:0] qq;
-reg regw, memr;
-reg [4:0] rda;
 
 initial begin
 	{ RegWrite_o, MemReg_o, rd_addr_o, data1_o, data2_o } <= 0;
