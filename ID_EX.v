@@ -88,7 +88,7 @@ reg [31:0] imm_o;
 
 always @(posedge clk_i or posedge rst_i) begin
 	if(rst_i) begin
-		{ start_o, RegWrite_o, MemtoReg_o, MemRead_o, MemWrite_o, ALUOp_o, ALUSrc_o, reg1Data_o, reg2Data_o, rs1_o, rs2_o, rd_o, funct_o, imm_o } = 0;
+		{ start_o, RegWrite_o, MemtoReg_o, MemRead_o, MemWrite_o, ALUOp_o, ALUSrc_o, reg1Data_o, reg2Data_o, rs1_o, rs2_o, rd_o, funct_o, imm_o } <= 0;
 	end
 	else begin
 		if(start_i == 1) begin

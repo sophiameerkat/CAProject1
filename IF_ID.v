@@ -25,8 +25,8 @@ always @(posedge clk or posedge rst_i) begin
 		if(start_i == 1) begin
 			start_o = start_i;
 			if(IF_flush) begin
-				PC_o = 32'b0;
-				instruction_o = 32'b0;
+				PC_o <= 32'b0;
+				instruction_o <= 32'b0;
 			end
 
 			else if(IF_stall) begin
@@ -34,8 +34,8 @@ always @(posedge clk or posedge rst_i) begin
 			end
 
 			else begin
-				PC_o = PC_i;
-				instruction_o = instruction_i;
+				PC_o <= PC_i;
+				instruction_o <= instruction_i;
 			end
 		end
 	end

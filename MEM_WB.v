@@ -20,15 +20,8 @@ reg [31:0] qq;
 reg regw, memr;
 reg [4:0] rda;
 
-/*initial begin
+initial begin
 	{ RegWrite_o, MemReg_o, rd_addr_o, data1_o, data2_o } <= 0;
-end
-*/
-always@(*) begin
-	qq = data1_i;
-	regw = RegWrite_i;
-	memr = MemReg_i;
-	rda = rd_addr_i;
 end
 
 always @(posedge clk_i or posedge rst_i) begin
@@ -37,10 +30,10 @@ always @(posedge clk_i or posedge rst_i) begin
 	end
 	else begin
 		if(start_i == 1) begin
-			RegWrite_o <= regw;
-			MemReg_o <= memr;
-			rd_addr_o <= rda;
-			data1_o <= qq;
+			RegWrite_o <= RegWrite_i;
+			MemReg_o <= MemReg_i;
+			rd_addr_o <= rd_addr_i;
+			data1_o <= data1_i;
 			data2_o <= data2_i;
 		end
 	end
