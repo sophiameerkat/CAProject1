@@ -45,6 +45,7 @@ initial begin
     // TODO: initialize your pipeline registers
     CPU.IF_ID.PC_o = 32'b0;
     CPU.IF_ID.instruction_o = 32'b0;
+
     CPU.ID_EX.RegWrite_o = 0;
     CPU.ID_EX.MemtoReg_o = 0;
     CPU.ID_EX.MemRead_o = 0;
@@ -58,6 +59,20 @@ initial begin
     CPU.ID_EX.rd_o = 5'b0;
     CPU.ID_EX.funct_o = 10'b0;
     CPU.ID_EX.imm_o = 32'b0;
+
+    CPU.EX_MEM.RegWrite_o = 0;
+    CPU.EX_MEM.MemReg_o = 0;
+    CPU.EX_MEM.MemRead_o = 0;
+    CPU.EX_MEM.MemWrite_o = 0;
+    CPU.EX_MEM.rd_addr_o = 5'b0;
+    CPU.EX_MEM.ALUResult_o = 31'b0;
+    CPU.EX_MEM.MemData_o = 31'b0; 
+
+    CPU.MEM_WB.RegWrite_o = 0;
+    CPU.MEM_WB.MemReg_o = 0;
+    CPU.MEM_WB.rd_addr_o = 5'b0;
+    CPU.MEM_WB.data1_o = 31'b0;
+    CPU.MEM_WB.data2_o = 31'b0;
 
     
     // Load instructions into instruction memory
