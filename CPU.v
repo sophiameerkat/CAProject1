@@ -94,7 +94,7 @@ assign SignExtensionIn = Instruction;
 //ID_branch
 wire Zero_ID_zerotoID_branch;
 
-Adder Adder(
+Branch_Adder Branch_Adder(
     .addr_i     (IF_ID_PC_o),
     .imm_i      (SignExtensionOut),
     .addr_o     (PCBranch)
